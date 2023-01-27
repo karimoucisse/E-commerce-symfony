@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier index{% endblock %}
+
+{% block body %}
+    <h1 class="titre-panier">Panier</h1>
+    <div class="container container-panier">
+        <div class="left">
+            {% include "contenu_panier/_list.html.twig" with {'contenuPaniers': contenuPaniers} %}  
+        </div>
+        <div class="right">
+            {% include "contenu_panier/_totalCard.html.twig" with {'contenuPaniers': contenuPaniers} %}
+        </div>
+    </div>
+
+    {# <a href="{{ path('app_panier_show', {'id': panier.id}) }}">show</a>
+    <a href="{{ path('app_panier_edit', {'id': panier.id}) }}">edit</a>
+    <a href="{{ path('app_panier_new') }}">Create new</a> #}
+
+{% endblock %}

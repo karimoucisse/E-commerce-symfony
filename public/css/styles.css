@@ -10,33 +10,38 @@ a {
     font-size: inherit;
 }
 
+.container {
+    display: flex;
+    padding: 40px;
+}
+
 header {
     display: flex;
     height: 70px;
     align-items: center;
-    padding: 0 40px;
-    background-color: rgb(44, 50, 63);
+    padding: 0 60px;
+    background-color: rgb(33,42,47);
     color: white;
 }
 
-.left_header {
+.center_header {
     flex: 1;
     font-size: 24px;
     font-weight: 500;
     cursor: pointer;
+    text-align: center;
 }
-.center_header {
+.left_header {
     flex: 1;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
 }
 ul {
     display: flex;
     list-style-type: none;
-    gap: 10px;
+    /* gap: 10px; */
 }
 li {
-    margin-left: 20px;
     border: 1px solid transparent;
     padding: 7px;
     border-radius: 10px;
@@ -58,5 +63,232 @@ li:hover {
 .right_header button{
     padding: 7px 20px;
 }
+
+
+/* css page d'acceuil container produit*/
+.container-produits {
+    padding: 40px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+}
+
+.produit-item{
+    min-width: 100px;
+    box-shadow: 4px 4px 4px rgba(232, 227, 227, 0.7);
+    background-color: rgb(246,246,246);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.produit-item:hover{
+    transform: scale(1.01);
+}
+
+.produit-item img {
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+}
+.produit-item .desc{
+    background-color: #1c2930;
+    color: #ffff;
+    padding: 15px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.produit-item p{
+    font-weight: 600;
+}
+
+/* css page produit */
+.container-produit{
+    display: flex;
+    padding: 40px;
+    position: relative;
+}
+.container-produit .left{
+    flex: 1;
+}
+.container-produit img {
+    width: 100%;
+    background-color: rgb(246,246,246);
+    height: 70vh;
+    object-fit: cover ;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+.container-produit .right{
+    flex: 1;
+    padding: 50px 50px 59px 170px;
+    position: relative;
+
+}
+.container-produit h1{
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+.container-produit span {
+    font-size: 30px;
+    margin-left: 40px;
+}
+.container-produit .desc {
+    margin-top: 50px;
+    margin-left: 40px;
+}
+
+.container-produit button{
+    padding: 15px 20%;
+    background-color: #212a2f;
+    color: white;
+    font-weight: 600;
+    border: 1px solid #212a2f;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    margin-top: 100px;
+}
+
+/* css page panier */
+
+.titre-panier{
+    text-align: center;
+    margin-top: 20px;
+    letter-spacing: 2px;
+    font-size: 35px;
+    font-weight: 700;
+}
+.container-panier{
+    display: flex;
+    padding: 60px 50px;
+    min-height: 70vh;
+}
+
+.container-panier .left{
+    flex: 1;
+}
+
+.container-panier .right{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* css page panier produit */
+.item-container {
+    max-width: 600px;
+    height: 130px;
+    display: flex;
+    background-color: #ffff;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+.left-produit{
+    flex: 1;
+    height: 100%;
+}
+.left-produit img {
+    height: inherit;
+    object-fit: cover;
+    width: 100%;
+}
+.right-produit{
+    flex: 2;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.right-produit .top {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px 0 14px;
+}
+.right-produit .top h3{
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+.right-produit .top p{
+    font-weight: 300;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+.right-produit .button-supprimer {
+    cursor: pointer;
+    height: 30px;
+    padding: 0 20px;
+    background-color: red;
+    color: white;
+    border: none;
+}
+
+.right-produit .button-supprimer:hover {
+    transform: scale(1.02);
+    background-color: rgb(223, 18, 18);
+}
+
+/* css page panier total card */
+.container-panier .right .card-panier {
+    background-color: #ffff;
+    padding: 0px 30px;
+    max-height: 400px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+    min-width: 370px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-panier .titre{
+    text-align: center;
+    letter-spacing: 0.5px;
+    color: #1e3e59;
+    text-shadow: 2px 2px 4px #d6d7d7;
+}
+.card-panier .subtitre{
+    margin-bottom: 15px;
+    text-align: center;
+    cursor: pointer;
+    color: black;
+}
+.card-panier .container-prix{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+.card-panier .paragraph {
+    color: rgb(145, 145, 145);
+}
+.card-panier .container-total{
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid ;
+    padding-top: 20px;
+}
+.card-panier .total-paragraph {
+    font-weight: 600;
+}
+.card-panier .btn-validation{
+    margin-top: 40px;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: rgb(33,42,47);
+    color: #ffff;
+}
+.card-panier .btn-validation:hover {
+    transform: scale(1.002);
+}
+
+
+
+
+
+
+
 
 

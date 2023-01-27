@@ -1,0 +1,15 @@
+<div class="container container-produits">
+    {% for produit in produits %}
+        <div class="produit-item">
+            <a href="{{ path('app_produit_show', {'id': produit.id}) }}">
+                <img src="{{asset('uploads/'~produit.image)}}" alt="{{produit.image}}"/>
+                <div class="desc">
+                    <h3>{{produit.nom}}</h3>
+                    <p>{{ produit.prix }}</p>
+                </div>
+            </a>
+        </div>
+    {% else %}
+        <h1>Il n'y a pas de produits</h1>
+    {% endfor %}
+</div>

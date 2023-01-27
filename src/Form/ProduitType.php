@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\Produit;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class ProduitType extends AbstractType
 {
@@ -17,7 +19,7 @@ class ProduitType extends AbstractType
             ->add('prix')
             ->add('stock')
             ->add('image', FileType::class, [
-                'label' => 'Image (jpg, png, jpeg)',
+                'label' => 'Image (jpg, png, jpeg, wepp)',
                 'mapped' => false,
                 'required' => true,
                 'constraints' => [
@@ -27,8 +29,9 @@ class ProduitType extends AbstractType
                             'image/jpg',
                             'image/png',
                             'image/jpeg',
+                            'image/wepp',
                         ],
-                        'mimeTypesMessage' => 'seul les jpg, pnp et jpeg sont autorisés',
+                        'mimeTypesMessage' => 'seul les jpg, png, jpeg et wepp sont autorisés',
                     ])
                 ],
             ])

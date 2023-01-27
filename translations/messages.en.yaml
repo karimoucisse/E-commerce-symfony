@@ -1,5 +1,9 @@
 nav:
+  nouv: Novelties
   homme: Man
   femme: Woman
   connec: Se connecter
   inscription: Registration
+
+produit:
+  ajout_btn: Add to cart

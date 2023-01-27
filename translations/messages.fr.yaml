@@ -1,5 +1,9 @@
 nav:
+  nouv: Nouveautés
   homme: Homme
   femme: Femme
   connec: Se connecter
   inscription: S'inscrire
+
+produit:
+  ajout_btn: Ajouter au panier

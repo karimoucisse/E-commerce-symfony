@@ -16,19 +16,19 @@
     </head>
     <body>
         <header>
-            <div class="left_header">
-                Drippers
-            </div>
-            <nav class="center_header">
+            <nav class="left_header">
                 <ul>
+                    <li>{{ 'nav.nouv'|trans }}<li>
                     <li>{{ 'nav.homme'|trans }}<li>
                     <li>{{ 'nav.femme'|trans }}<li>
                 </ul>
             </nav>
+            <div class="center_header">
+                <a href="{{path('app_categorie_index')}}">Drippers</a>
+            </div>
             <div class="right_header">
                 <button><a href="{{path('app_login')}}">{{ 'nav.connec'|trans }}</a></button>
                 <button><a href="{{path('app_register')}}">{{ 'nav.inscription'|trans }}</a></button>
-                {# <button><a href="{{path('')}}">Panier</a></button> #}
             </div>
         </header>
         {% block body %}{% endblock %}
