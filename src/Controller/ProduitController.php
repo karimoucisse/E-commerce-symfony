@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\ContenuPanier;
 use App\Entity\Produit;
+use App\Form\ContenuPanierType;
 use App\Form\ProduitType;
+use App\Repository\ContenuPanierRepository;
+use App\Repository\PanierRepository;
 use App\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;

@@ -15,7 +15,7 @@ class ContenuPanierType extends AbstractType
             // ->add('quantite')
             // ->add('date')
             // ->add('panier')
-            ->add('produit')
+            // ->add('produit')
         ;
     }
 

@@ -13,7 +13,7 @@
             <div class="desc">
                 <p>{{ produit.description }}</p>
             </div>
-            <button><a href="{{ path('app_panier_index') }}">{{ 'produit.ajout_btn'|trans }}</a></button>
+            <button><a href="{{ path('app_contenu_panier_new', {'id': produit.id }) }}">{{ 'produit.ajout_btn'|trans }}</a></button>
         </div>
     <div>
 

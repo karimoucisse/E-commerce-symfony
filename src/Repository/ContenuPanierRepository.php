@@ -40,9 +40,10 @@ class ContenuPanierRepository extends ServiceEntityRepository
     }
 
     public function findContenuPanier($panierId){
-        $req = "SELECT * FROM contenu_panier A
-        INNER JOIN produit B ON A.produit_id = B.id
-        WHERE A.panier_id = $panierId";
+        $req = "SELECT * 
+        FROM  produit A
+        LEFT JOIN contenu_panier B ON B.produit_id = A.id
+        WHERE B.panier_id = $panierId";
 
         $conn = $this->getEntityManager()
         ->getConnection();
@@ -51,6 +52,7 @@ class ContenuPanierRepository extends ServiceEntityRepository
         $resultSet = $stmt->executeQuery();
         return $resultSet->fetchAllAssociative();
     }
+
 
 //    /**
 //     * @return ContenuPanier[] Returns an array of ContenuPanier objects

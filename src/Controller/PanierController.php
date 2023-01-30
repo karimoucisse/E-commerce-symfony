@@ -106,4 +106,23 @@ class PanierController extends AbstractController
 
         return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/delete/{id}', name: 'app_panier_delete_contenu')]
+    public function deletecontenu($id, ContenuPanierRepository $contenuPanierRepository): Response
+    {
+        $contenuPanier = $contenuPanierRepository->findBy(['id'=> $id]);
+        // dd($contenuPanier);
+        if ($contenuPanier) {
+            $contenuPanierRepository->remove($contenuPanier[0], true);
+        }
+
+        return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
+
+
+
+        // $userId = $user->getId();
+        //     $panier = $panierRepository->findPanier($userId);
+        //     // $contenuPaniers = $contenuPanierRepository->findContenuPanier($panier[0]['id']);
+        //     $contenuPaniers = $contenuPanierRepository->findBy(['panier'=> $panier[0]]);
+    }
 }

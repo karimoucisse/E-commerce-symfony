@@ -7,7 +7,6 @@ use App\Form\ContenuPanierType;
 use App\Repository\ContenuPanierRepository;
 use App\Repository\PanierRepository;
 use App\Repository\ProduitRepository;
-use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,44 +22,37 @@ class ContenuPanierController extends AbstractController
             'contenu_paniers' => $contenuPanierRepository->findAll(),
         ]);
     }
-
-    #[Route('/new', name: 'app_contenu_panier_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, 
-        ContenuPanierRepository $contenuPanierRepository, 
+    
+    #[Route('/new/{id}', name: 'app_contenu_panier_new', methods: ['GET', 'POST'])]
+    public function new(
+        $id,
+        Request $request, 
+        ContenuPanierRepository $contenuPanierRepository,
         PanierRepository $panierRepository,
         ProduitRepository $produitRepository,
-    ): Response {
+    ): Response{
         $contenuPanier = new ContenuPanier();
-        $form = $this->createForm(ContenuPanierType::class, $contenuPanier);
-        $form->handleRequest($request);
+        // $form = $this->createForm(ContenuPanierType::class, $contenuPanier);
+        // $form->handleRequest($request);
         $user = $this->getUser();
+        $produit = $produitRepository->findBy(['id'=> $id]);
 
         if(!empty($user)){
-            // $userId = $user->getId();
             $panier = $panierRepository->findOneBy(['utilisateur'=> $user]);
-        }
-        // $produit = 
-
-        if ($form->isSubmitted() && $form->isValid()) {
             // ajouter automatiquement la date
             // le produit a ajouter et la panier actuel de l'utilisateur
             // si l'utilisateur ajoute plus d'une fois le meme produit
             // alors on doit incrémenter la quantité de ce produits
-
             $contenuPanier->setQuantite(1);
-            // $contenuPanier->addProduit();
+            $contenuPanier->setProduit($produit[0]);
             $contenuPanier->setPanier($panier);
             $contenuPanier->setDate(new \DateTime());
-            
+    
             $contenuPanierRepository->save($contenuPanier, true);
-
-            return $this->redirectToRoute('app_contenu_panier_index', [], Response::HTTP_SEE_OTHER);
         }
+        
+        return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
 
-        return $this->renderForm('contenu_panier/new.html.twig', [
-            'contenu_panier' => $contenuPanier,
-            'form' => $form,
-        ]);
     }
 
     #[Route('/{id}', name: 'app_contenu_panier_show', methods: ['GET'])]
@@ -96,6 +88,7 @@ class ContenuPanierController extends AbstractController
             $contenuPanierRepository->remove($contenuPanier, true);
         }
 
-        return $this->redirectToRoute('app_contenu_panier_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }
