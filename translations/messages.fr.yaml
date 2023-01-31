@@ -4,6 +4,8 @@ nav:
   femme: Femme
   connec: Se connecter
   inscription: S'inscrire
+  panier: Panier
+  compte: Compte
 
 produit:
   ajout_btn: Ajouter au panier

@@ -2,7 +2,7 @@
     <h2 class="titre">Drippers</h2>
     <div class="container-prix">
         <div class="paragraph">Montant de la commande</div>
-        <div class="paragraph">155€</div>
+        <div class="paragraph">{{total}}€</div>
     </div>
     <div class="container-prix">
         <div class="paragraph">Livraison</div>
@@ -10,7 +10,7 @@
     </div>
     <div class="container-total">
         <p class="total-paragraph">Total</p>
-        <p class="total-paragraph">159</p>
+        <p class="total-paragraph">{{total + 4}}</p>
     </div>
-    <button class="btn-validation">Finaliser la commande</button>
+    <button class="btn-validation"><a href="{{ path('app_panier_achat', {'id': id}) }}">Finaliser la commande</a></button>
 </div>

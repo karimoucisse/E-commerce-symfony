@@ -4,18 +4,22 @@
 
 {% block body %}
     <h1 class="titre-panier">Panier</h1>
-    {# {{dump(contenuPaniers)}} #}
-    <div class="container container-panier">
-        <div class="left">
-            {% include "contenu_panier/_list.html.twig" with {'contenuPaniers': contenuPaniers} %}  
+    {% for produit in contenuPaniers %}
+        <div class="container container-panier">
+            <div class="left">
+                {% include "contenu_panier/_list.html.twig" with {'contenuPaniers': contenuPaniers} %}  
+            </div>
+            <div class="right">
+                {% include "contenu_panier/_totalCard.html.twig" with {'total': total, 'id': panier[0].id} %}
+            </div>
         </div>
-        <div class="right">
-            {% include "contenu_panier/_totalCard.html.twig" with {'contenuPaniers': contenuPaniers} %}
-        </div>
-    </div>
 
     {# <a href="{{ path('app_panier_show', {'id': panier.id}) }}">show</a>
     <a href="{{ path('app_panier_edit', {'id': panier.id}) }}">edit</a>
     <a href="{{ path('app_panier_new') }}">Create new</a> #}
+    {% else %}
+        <h1>il n'y a pas de produit</h1>
+    {% endfor %}
+    
 
 {% endblock %}

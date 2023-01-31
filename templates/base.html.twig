@@ -27,8 +27,13 @@
                 <a href="{{path('app_categorie_index')}}">Drippers</a>
             </div>
             <div class="right_header">
-                <button><a href="{{path('app_login')}}">{{ 'nav.connec'|trans }}</a></button>
-                <button><a href="{{path('app_register')}}">{{ 'nav.inscription'|trans }}</a></button>
+                {% if app.user %}
+                    <button><a href="{{path('app_account', {'id': 'compte'})}}">{{ 'nav.compte'|trans }}</a></button>
+                {% else %}
+                    <button><a href="{{path('app_login')}}">{{ 'nav.connec'|trans }}</a></button>
+                    <button><a href="{{path('app_register')}}">{{ 'nav.inscription'|trans }}</a></button>
+                {% endif %}
+                <button><a href="{{path('app_panier_index')}}">{{ 'nav.panier'|trans }}</a></button>
             </div>
         </header>
         {% block body %}{% endblock %}
