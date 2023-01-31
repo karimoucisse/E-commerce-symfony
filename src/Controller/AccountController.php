@@ -15,8 +15,6 @@ class AccountController extends AbstractController
         $user = $this->getUser();
         $userId = $user->getId();
         $commandes = $panierRepository->buildCommande($userId);
-        dd($commandes);
-
         return $this->render('account/index.html.twig', [
             'id' => $id,
             'commandes'=> $commandes
