@@ -49,7 +49,7 @@ class PanierRepository extends ServiceEntityRepository
             WHERE etat = 0 AND utilisateur_id = $userId";
     
             $conn = $this->getEntityManager()
-            ->getConnection();
+                ->getConnection();
     
             $stmt = $conn->prepare($req);
             $resultSet = $stmt->executeQuery();
@@ -57,6 +57,24 @@ class PanierRepository extends ServiceEntityRepository
         }
 
     }
+
+    public function buildCommande($userId){
+        if($userId){
+            $req = "SELECT * FROM panier p
+            LEFT JOIN contenu_panier c ON p.id = c.panier_id
+            LEFT JOIN produit d ON c.produit_id = d.id
+            WHERE p.etat = 1 AND utilisateur_id = $userId";
+    
+            $conn = $this->getEntityManager()
+                ->getConnection();
+    
+            $stmt = $conn->prepare($req);
+            $resultSet = $stmt->executeQuery();
+            return $resultSet->fetchAllAssociative();
+        }
+
+    }
+
 
 //    /**
 //     * @return Panier[] Returns an array of Panier objects

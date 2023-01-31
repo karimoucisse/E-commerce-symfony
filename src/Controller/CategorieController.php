@@ -31,7 +31,7 @@ class CategorieController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $categorieRepository->save($categorie, true);
-
+            $this->addFlash('success', 'categorie crée');
             return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -57,7 +57,7 @@ class CategorieController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $categorieRepository->save($categorie, true);
-
+            $this->addFlash('success', 'categorie modifier');
             return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -72,6 +72,7 @@ class CategorieController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$categorie->getId(), $request->request->get('_token'))) {
             $categorieRepository->remove($categorie, true);
+            $this->addFlash('success', 'categorie supprimer');
         }
 
         return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);

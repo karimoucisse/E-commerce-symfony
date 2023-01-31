@@ -21,9 +21,6 @@ class PanierController extends AbstractController
         $user = $this->getUser();
         $total = 0;
 
-        
-        // $newPanier = new Panier;
-        // $contenuPaniers = $newPanier->getContenuPaniers();
 
         if(!empty($user)){
             $userId = $user->getId();
@@ -33,8 +30,10 @@ class PanierController extends AbstractController
             // query qui récupere le contenu panier join avec les produits
             $contenuPaniersAndProduits = $contenuPanierRepository->findContenuPanier($panier[0]['id']);
 
-            foreach($contenuPaniers as $contenu){
-                $total += $contenu->getQuantite() * $contenu->getProduit()->getPrix();
+            if($contenuPaniers){
+                foreach($contenuPaniers as $contenu){
+                    $total += $contenu->getQuantite() * $contenu->getProduit()->getPrix();
+                }
             }
     
             return $this->render('panier/index.html.twig', [
@@ -43,16 +42,6 @@ class PanierController extends AbstractController
                 'total' => $total,
             ]);
         }
-
-
-        // if($panier){
-        //     return $this->render('panier/index.html.twig', [
-        //         'paniers' => $panier,
-        //     ]);
-        // }else {
-        //     // si l'utilisateur n'a pas de panier on lui créer
-        //     // return $this->redirectToRoute('app_panier_new', [], Response::HTTP_SEE_OTHER);
-        // }
         
     }
 
@@ -72,6 +61,7 @@ class PanierController extends AbstractController
             $panier->setDate(new \DateTime());
             $panier->setEtat(0);
             $panierRepository->save($panier, true);
+            $this->addFlash('success', 'panier crée');
         
         return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);
     }
@@ -92,7 +82,7 @@ class PanierController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $panierRepository->save($panier, true);
-
+            $this->addFlash('success', 'categorie modifier');
             return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -107,6 +97,7 @@ class PanierController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$panier->getId(), $request->request->get('_token'))) {
             $panierRepository->remove($panier, true);
+            $this->addFlash('success', 'panier supprimer');
         }
 
         return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
@@ -119,16 +110,10 @@ class PanierController extends AbstractController
         // dd($contenuPanier);
         if ($contenuPanier) {
             $contenuPanierRepository->remove($contenuPanier[0], true);
+            $this->addFlash('success', 'panier supprimer');
         }
 
         return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
-
-
-
-        // $userId = $user->getId();
-        //     $panier = $panierRepository->findPanier($userId);
-        //     // $contenuPaniers = $contenuPanierRepository->findContenuPanier($panier[0]['id']);
-        //     $contenuPaniers = $contenuPanierRepository->findBy(['panier'=> $panier[0]]);
     }
 
     #[Route('achat/validation/{id}', name: 'app_panier_achat', methods: ['GET', 'POST'])]
@@ -138,6 +123,7 @@ class PanierController extends AbstractController
         $panier->setEtat(1);
         // on save
         $panierRepository->save($panier, true);
+        $this->addFlash('success', 'Achat valider');
         // on créer un nouveau panier, avec un "etat" à false
         return $this->redirectToRoute('app_panier_new', [], Response::HTTP_SEE_OTHER);
 

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ContenuPanierRepository::class)]
 class ContenuPanier
@@ -17,15 +18,20 @@ class ContenuPanier
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
     private ?int $quantite = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\NotBlank]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\ManyToOne(inversedBy: 'contenuPaniers')]
+    #[Assert\NotBlank]
     private ?Panier $panier = null;
 
     #[ORM\ManyToOne(inversedBy: 'contenuPaniers')]
+    #[Assert\NotBlank]
     #[ORM\JoinColumn(nullable: false)]
     private ?Produit $produit = null;
 

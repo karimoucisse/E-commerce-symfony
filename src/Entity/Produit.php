@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
@@ -18,12 +19,16 @@ class Produit
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
     private ?float $prix = null;
 
     #[ORM\Column]
@@ -34,6 +39,7 @@ class Produit
     private ?Categorie $categorie = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     private ?string $image = null;
 
     #[ORM\OneToMany(mappedBy: 'produit', targetEntity: ContenuPanier::class, orphanRemoval: true)]

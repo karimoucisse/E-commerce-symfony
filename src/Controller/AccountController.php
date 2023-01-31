@@ -12,10 +12,15 @@ class AccountController extends AbstractController
     #[Route('/account/{id}', name: 'app_account')]
     public function index($id, PanierRepository $panierRepository ): Response
     {
-        $commandes = $panierRepository->findBy(['etat'=> 1]);
+        $user = $this->getUser();
+        $userId = $user->getId();
+        $commandes = $panierRepository->buildCommande($userId);
+        dd($commandes);
+
         return $this->render('account/index.html.twig', [
             'id' => $id,
             'commandes'=> $commandes
         ]);
     }
 }
+

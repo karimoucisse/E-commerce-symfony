@@ -3,7 +3,9 @@
 {% block title %}Categorie index{% endblock %}
 
 {% block body %}
-    
+    {% if is_granted('ROLE_ADMIN') %}
+        <button><a href="{{path('app_produit_new')}}">Ajout de produit</a></button>
+    {% endif %}
     {% include "produit/_list.html.twig" with {'produits': produits} %}
 
 {% endblock %}

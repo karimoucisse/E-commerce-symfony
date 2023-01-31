@@ -9,3 +9,11 @@ nav:
 
 produit:
   ajout_btn: Add to cart
+
+error:
+  titre: there is an error
+  btn: Retur to product page
+
+account: 
+  btn_compte: Account
+  btn_commande: Orders

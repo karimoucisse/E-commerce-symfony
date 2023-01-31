@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PanierRepository::class)]
 class Panier
@@ -18,12 +19,15 @@ class Panier
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\NotBlank]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
     private ?bool $etat = null;
 
     #[ORM\ManyToOne(inversedBy: 'paniers')]
+    #[Assert\NotBlank]
     private ?User $utilisateur = null;
 
     #[ORM\OneToMany(mappedBy: 'panier', targetEntity: ContenuPanier::class)]

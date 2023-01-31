@@ -32,8 +32,10 @@ class ContenuPanierController extends AbstractController
         PanierRepository $panierRepository,
         ProduitRepository $produitRepository,
     ): Response{
+        $user = $this->getUser();
         $produit = $produitRepository->findBy(['id'=> $id]);
-        $contenuPanier = $contenuPanierRepository->findOneBy(['produit' => $produit]);
+        $panier = $panierRepository->findOneBy(['utilisateur'=> $user, 'etat' => 0]);
+        $contenuPanier = $contenuPanierRepository->findOneBy(['produit' => $produit, 'panier' => $panier]);
 
         // au moment de rajouter le produit dans le panier;
         // on regarde s'il n'y est pas deja present, et si c'est le cas alors on
@@ -48,12 +50,7 @@ class ContenuPanierController extends AbstractController
 
             $contenuPanier = new ContenuPanier();
             $user = $this->getUser();
-            // $quantite = $request->get('produit_quantite');
-    
-            // $quantite = (int) $request->request->get('produit_quantite');
-            // dd($quantite);
             if(!empty($user)){
-                $panier = $panierRepository->findOneBy(['utilisateur'=> $user]);
                 // ajouter automatiquement la date
                 // le produit a ajouter et la panier actuel de l'utilisateur
                 // si l'utilisateur ajoute plus d'une fois le meme produit
@@ -65,6 +62,7 @@ class ContenuPanierController extends AbstractController
         
                 $contenuPanierRepository->save($contenuPanier, true);
             }
+            $this->addFlash('success', 'Produit créer');
             
             return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -87,7 +85,7 @@ class ContenuPanierController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $contenuPanierRepository->save($contenuPanier, true);
-
+            $this->addFlash('success', 'panier modifier');
             return $this->redirectToRoute('app_contenu_panier_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -102,6 +100,7 @@ class ContenuPanierController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$contenuPanier->getId(), $request->request->get('_token'))) {
             $contenuPanierRepository->remove($contenuPanier, true);
+            $this->addFlash('success', 'panier supprimer');
         }
 
         return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);

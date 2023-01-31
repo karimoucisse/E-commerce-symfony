@@ -3,6 +3,10 @@
 {% block title %}Produit{% endblock %}
 
 {% block body %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <button><a href="{{path('app_produit_delete', {'id':produit.id})}}">supprimer le produit</a></button>
+        <button><a href="{{path('app_produit_edit', {'id':produit.id})}}">modifier le produit</a></button>
+    {% endif %}
     <div class="container container-produit">
         <div class="left">
             <img src="{{asset('uploads/'~produit.image)}}" alt="{{produit.image}}"/>
@@ -13,10 +17,7 @@
             <div class="desc">
                 <p>{{ produit.description }}</p>
             </div>
-            <form>
-                {# <input type="number" name="produit_quantite" id="nom" value="1"> #}
-                <button><a href="{{ path('app_contenu_panier_new', {'id': produit.id }) }}">{{ 'produit.ajout_btn'|trans }}</a></button>
-            </form>
+            <button><a href="{{ path('app_contenu_panier_new', {'id': produit.id }) }}">{{ 'produit.ajout_btn'|trans }}</a></button>
         </div>
     <div>
 

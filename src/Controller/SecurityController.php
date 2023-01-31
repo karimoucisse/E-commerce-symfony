@@ -12,9 +12,10 @@ class SecurityController extends AbstractController
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+        // si un user est deja connecter, alors retourne à la page d'accueil
+        if($this->getUser()){
+            return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);
+        }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();

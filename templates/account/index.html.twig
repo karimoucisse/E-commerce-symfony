@@ -6,8 +6,8 @@
 
 <div class="example-wrapper">
     <div>
-        <button><a href="{{ path('app_account', {'id': 'compte'}) }}">Compte</a></button>
-        <button><a href="{{ path('app_account', {'id': 'commande'}) }}">Commandes</a></button>
+        <button><a href="{{ path('app_account', {'id': 'compte'}) }}">{{ 'account.btn_compte'|trans }}Compte</a></button>
+        <button><a href="{{ path('app_account', {'id': 'commande'}) }}">{{ 'account.btn_commande'|trans }}Commandes</a></button>
     </div>
     {% if id == 'compte' %}
         {% include "account/_user_account.html.twig" %}

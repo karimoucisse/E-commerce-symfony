@@ -54,7 +54,7 @@ class ProduitController extends AbstractController
             }
 
             $produitRepository->save($produit, true);
-
+            $this->addFlash('success', 'produit créer');
             return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -80,7 +80,7 @@ class ProduitController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $produitRepository->save($produit, true);
-
+            $this->addFlash('success', 'categorie modifier');
             return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -95,6 +95,8 @@ class ProduitController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$produit->getId(), $request->request->get('_token'))) {
             $produitRepository->remove($produit, true);
+            $this->addFlash('success', 'produit supprimer');
+            return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);

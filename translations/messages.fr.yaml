@@ -9,3 +9,11 @@ nav:
 
 produit:
   ajout_btn: Ajouter au panier
+
+error:
+  titre: Il ya une erreur
+  btn: Retourner à la page de produit
+
+account: 
+  btn_compte: Compte
+  btn_commande: Commandes

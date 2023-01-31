@@ -16,13 +16,6 @@
     </head>
     <body>
         <header>
-            <nav class="left_header">
-                <ul>
-                    <li>{{ 'nav.nouv'|trans }}<li>
-                    <li>{{ 'nav.homme'|trans }}<li>
-                    <li>{{ 'nav.femme'|trans }}<li>
-                </ul>
-            </nav>
             <div class="center_header">
                 <a href="{{path('app_categorie_index')}}">Drippers</a>
             </div>
@@ -36,6 +29,11 @@
                 <button><a href="{{path('app_panier_index')}}">{{ 'nav.panier'|trans }}</a></button>
             </div>
         </header>
+        {% for type, messages in app.flashes %}
+            {% for msg in messages %}
+                <p class="alert alert-{{type}}">{{msg}}</p>
+            {% endfor %}
+        {% endfor %}
         {% block body %}{% endblock %}
     </body>
 </html>
